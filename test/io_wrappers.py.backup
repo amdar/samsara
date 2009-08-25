@@ -1,0 +1,29 @@
+﻿import curses
+import curses.ascii
+import curses.wrapper
+
+class Curses:
+	KEY_DOWN = curses.KEY_DOWN
+	KEY_UP = curses.KEY_UP
+	KEY_LEFT = curses.KEY_LEFT
+	KEY_RIGHT = curses.KEY_RIGHT
+	
+	def __init__(self):
+		try:
+			self.screen = curses.initscr()
+			curses.noecho()
+			curses.cbreak()
+			self.screen.keypad(1)
+			self.screen_height, self.screen_width = self.screen.getmaxyx()
+		except:
+			self.deinit()
+			exit()
+		
+	def get_key(self):
+		return self.screen.getch()
+		
+	def deinit(self):
+		self.screen.keypad(0)
+		curses.echo()
+		curses.nocbreak()
+		curses.endwin()

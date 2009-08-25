@@ -1,0 +1,41 @@
+import data
+import misc
+import plotter
+
+class Area:
+	"A certain 3 dimensional area the hero can explore."
+	def __init__(self, name, desc, size_x, size_y, size_z):
+		self.name = name
+		self.desc = desc
+		self.size_x = size_x
+		self.size_y = size_y
+		self.size_z = size_z
+		self.map = []
+		self.map_boundary_x = self.size_x - 1
+		self.map_boundary_y = self.size_y - 1
+		
+		self.__generate_map()
+		
+	def __generate_map(self):
+		"Recursively generates a 3 dimensional map consisting of Tiles"
+		# Initialize map
+		for fill in range(self.size_x * self.size_y * self.size_z):
+			self.map.append(self.__instantiate_tile(data.tile_catalog[0])) # self.__instantiate_tile(data.tile_catalog[0])
+		
+		# Initialize map generation
+		room_info = []
+		rooms_to_dig = 16
+		corridor_info = []
+		corridor_length_max = 8
+		corridor_length_min = 4
+		
+		# Main map generator loop
+		
+class Tile:
+	"A cubic unit of space"
+	def __init__(self, name, desc, char, is_solid = False):
+		self.name = name
+		self.desc = desc
+		self.char = char
+		self.is_solid = is_solid
+		
